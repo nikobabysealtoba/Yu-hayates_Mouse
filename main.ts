@@ -1,0 +1,9 @@
+Keybinds.setSimulatorKeymap(
+Keybinds.PlayerNumber.ONE,
+Keybinds.CustomKey.W,
+Keybinds.CustomKey.A,
+Keybinds.CustomKey.S,
+Keybinds.CustomKey.D,
+Keybinds.CustomKey.LEFT_CLICK,
+Keybinds.CustomKey.RIGHT_CLICK
+)
