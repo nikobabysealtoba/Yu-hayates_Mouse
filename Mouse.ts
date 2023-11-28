@@ -2,7 +2,7 @@ namespace SpriteKind {
     export const Mouse = SpriteKind.create()
 }
 
-let sensibilityX = 1.34 * 1023
+let sensibilityX = 1.55 * 1023
 let sensibilityY = 1.12 * 1023
 let Y = 0
 let X = 0
@@ -52,8 +52,8 @@ namespace Mouse {
 //% block="Set sensibility of mouse to $sensibilityNum"
 //% sensibilityNum.def=1.12
 export function Setsensibility(sensibilityNum: number) {
-    sensibilityY = Math.map(sensibilityNum, 0, 1, 500, 1023)
-    sensibilityX = Math.map(sensibilityNum * 1.3, 0, 1, 500, 1023)
+    sensibilityY = Math.map(sensibilityNum/ 1.33, 0, 1, 500, 1023)
+    sensibilityX = Math.map(sensibilityNum * 1.33, 0, 1, 500, 1023)
 }
     export function x() {
         return GetPositionOfMouse(Position.X)
