@@ -36,6 +36,8 @@ namespace Mouse {
     game.onUpdate(function() {
         if (DrawMouseOnScreen){
             MouseDATA.setPosition(Mouse.x() , Mouse.y())
+        } else {
+            MouseDATA.destroy()
         }
     })     
     //% block="Get $Pos of mouse"
