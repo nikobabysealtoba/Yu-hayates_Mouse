@@ -1,11 +1,10 @@
 {
-    "name": "game with mouse",
+    "name": "Mouse+ extension by Yu-Hayate",
     "version": "0.0.1",
     "description": "",
     "dependencies": {
         "device": "*",
-        "controller": "*",
-        "Custom Keybind Extension": "github:Brohann3214/custom-keybind-extension#ce1cb5acda5cd438592e38da4aaab10b73b46c64"
+        "controller": "*"
     },
     "files": [
         "main.blocks",
@@ -24,5 +23,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
