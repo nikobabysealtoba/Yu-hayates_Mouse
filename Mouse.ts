@@ -53,7 +53,7 @@ export function Setsensibility(sensibilityNum: number) {
     export function WhatHitboxIsMouseIn() {
         return isPositionInHitbox(GetPositionOfMouse(Position.X), GetPositionOfMouse(Position.Y))
     }
-    //% block="draw mouse on screen $draw with image $img and hitbox at x$x1 y$y1"
+    //% block="draw mouse on screen $draw with image $img=screen_image_picker and hitbox at x$x1 y$y1"
     export function DrawMouse(draw: boolean, img: Image, x1: number, y1: number) {
         DrawMouseOnScreen = draw
         MouseImage = img
