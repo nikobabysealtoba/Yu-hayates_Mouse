@@ -2,7 +2,8 @@ namespace SpriteKind {
     export const Mouse = SpriteKind.create()
 }
 
-let sensibility = 1.124 * 1023
+let sensibilityX = 1.34 * 1023
+let sensibilityY = 1.12 * 1023
 let Y = 0
 let X = 0
 let DrawMouseOnScreen = false
@@ -40,10 +41,10 @@ namespace Mouse {
     //% block="Get $Pos of mouse"
     export function GetPositionOfMouse(Pos: Position) {
         if (Pos == 0) {
-            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibility, sensibility), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0]
+            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX, sensibilityX), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0]
             return X
         } else {
-            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibility, sensibility), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1]
+            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibilityY, sensibilityY), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1]
             return Y
         }
     }
@@ -51,7 +52,8 @@ namespace Mouse {
 //% block="Set sensibility of mouse to $sensibilityNum"
 //% sensibilityNum.def=1.12
 export function Setsensibility(sensibilityNum: number) {
-    sensibility = Math.map(sensibilityNum, 0, 1, 500, 1023)
+    sensibilityY = Math.map(sensibilityNum, 0, 1, 500, 1023)
+    sensibilityX = Math.map(sensibilityNum * 1.3, 0, 1, 500, 1023)
 }
     export function x() {
         return GetPositionOfMouse(Position.X)
