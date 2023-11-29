@@ -21,8 +21,6 @@ enum Position {
     Y = 1
 }
 function isPositionInHitbox(x: number, y: number): string {
-    x -= mouseHitbox[0] - CameraProperty.X
-    y -= mouseHitbox[1] - CameraProperty.Y
     for (let hitbox of hitboxes) {
         let rect = hitbox.rect;
         if (x >= rect[0] && y >= rect[1] && x <= rect[2] && y <= rect[3]) {
@@ -35,7 +33,7 @@ function isPositionInHitbox(x: number, y: number): string {
 namespace Mouse {
     game.onUpdate(function() {
         if (DrawMouseOnScreen){
-            MouseDATA.setPosition(Mouse.x() , Mouse.y())
+            MouseDATA.setPosition(GetPositionOfMouse(0), GetPositionOfMouse(1))
         } else {
             MouseDATA.destroy()
         }
@@ -43,25 +41,28 @@ namespace Mouse {
     //% block="Get $Pos of mouse"
     export function GetPositionOfMouse(Pos: Position) {
         if (Pos == 0) {
-            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX, sensibilityX), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0] - CameraProperty.X
+            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX, sensibilityX), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0] // Add the camera's X position to the mouse X position
+            X += scene.cameraProperty(CameraProperty.X) - screen.width / 2
             return X
         } else {
-            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibilityY, sensibilityY), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1] - CameraProperty.Y
+            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibilityY, sensibilityY), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1]// Add the camera's Y position to the mouse Y position
+            Y += scene.cameraProperty(CameraProperty.Y) - screen.height / 2
             return Y
         }
     }
 
+
 //% block="Set sensibility of mouse to $sensibilityNum"
 //% sensibilityNum.def=1.12
 export function Setsensibility(sensibilityNum: number) {
-    sensibilityY = Math.map(sensibilityNum/ 1.33, 0, 1, 500, 1023)
+    sensibilityY = Math.map(sensibilityNum / 1.33, 0, 1, 500, 1023)
     sensibilityX = Math.map(sensibilityNum * 1.33, 0, 1, 500, 1023)
 }
     export function x() {
-        return GetPositionOfMouse(Position.X)
+        return GetPositionOfMouse(0)
     } 
     export function y() {
-        return GetPositionOfMouse(Position.Y)
+        return GetPositionOfMouse(1)
     }
     //% block="create hitbox with name $name at x$x1 y$y1 to x$x2 y$y2"
     //% Name.shadow="HitboxNameList"
@@ -87,6 +88,10 @@ export function Setsensibility(sensibilityNum: number) {
         MouseImage = img
         mouseHitbox = [x1,y1]
         MouseDATA = sprites.create(MouseImage, SpriteKind.Player)
+    }
+    //% block="Mouse Sprite"
+    export function mouseSprite() {
+        return MouseDATA
     }
     //% block="$name"
     //% blockId=HitboxNameList

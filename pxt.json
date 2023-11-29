@@ -11,7 +11,9 @@
         "main.ts",
         "README.md",
         "assets.json",
-        "Mouse.ts"
+        "Mouse.ts",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
     ],
     "testFiles": [
         "test.ts"
