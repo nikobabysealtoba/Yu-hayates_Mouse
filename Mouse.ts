@@ -6,6 +6,7 @@ let sensibilityX00 = 1.55 * 1023
 let sensibilityY01 = 1.12 * 1023
 let Y03 = 0
 let X02 = 0
+let HitBoxCount09 = 0
 let DrawMouseOnScreen04 = false
 let MouseImage05 = img`
     . 2 . 
@@ -30,6 +31,7 @@ function isPositionInHitbox(x: number, y: number): string {
     return "";
 }
 //% color="#8A2BE2" icon="\uf245" 
+//% groups="['Mouse', 'Hitboxes']"
 namespace Mouse {
     game.onUpdate(function () {
         if (DrawMouseOnScreen04) {
@@ -39,6 +41,7 @@ namespace Mouse {
         }
     })
     //% block="Get $Pos of mouse"
+    //% group="Mouse"
     export function GetPositionOfMouse(Pos: Position) {
         if (Pos == 0) {
             X02 = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX00, sensibilityX00), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox06[0] // Add the camera's X position to the mouse X position
@@ -53,23 +56,29 @@ namespace Mouse {
 
 
     //% block="Set sensibility of mouse to $sensibilityNum"
-    //% sensibilityNum.def=1.12
+    //% sensibilityNum.defl=1.12
+    //% group="Mouse"
     export function Setsensibility(sensibilityNum: number) {
         sensibilityY01 = Math.map(sensibilityNum / 1.33, 0, 1, 500, 1023)
         sensibilityX00 = Math.map(sensibilityNum * 1.33, 0, 1, 500, 1023)
     }
+    //% group="Mouse"
     export function x() {
         return GetPositionOfMouse(0)
     }
+    //% group="Mouse"
     export function y() {
         return GetPositionOfMouse(1)
     }
     //% block="create hitbox with name $name at x$x1 y$y1 to x$x2 y$y2"
-    //% Name.shadow="HitboxNameList"
+    //% name.shadow="HitboxNameList"
+    //% group="Hitboxes"
     export function createHitbox(x1: number, y1: number, x2: number, y2: number, name: string): void {
         hitboxes08.push({ name: name, rect: [x1, y1, x2, y2] });
+        HitBoxCount09++
     }
     //% block="is mouse within hitbox"
+    //% group="Hitboxes"
     export function ISmouseWithinHitbox() {
         if (isPositionInHitbox(GetPositionOfMouse(Position.X), GetPositionOfMouse(Position.Y)) != "") {
             return true
@@ -78,10 +87,13 @@ namespace Mouse {
         }
     }
     //% block="what hitbox is mouse tutching"
+    //% group="Hitboxes"
     export function WhatHitboxIsMouseIn() {
         return isPositionInHitbox(GetPositionOfMouse(Position.X), GetPositionOfMouse(Position.Y))
     }
     //% block="draw mouse on screen $draw with image $img=screen_image_picker and hitbox at x$x1 y$y1"
+    //% group="Mouse"
+    //% draw.defl=true
     export function DrawMouse(draw: boolean, img: Image, x1: number, y1: number) {
         MouseDATA07.destroy()
         DrawMouseOnScreen04 = draw
@@ -90,6 +102,7 @@ namespace Mouse {
         MouseDATA07 = sprites.create(MouseImage05, SpriteKind.Player)
     }
     //% block="Mouse Sprite"
+    //% group="Mouse"
     export function mouseSprite() {
         return MouseDATA07
     }
