@@ -1,6 +1,6 @@
 {
     "name": "Mouse+ extension by Yu-Hayate",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "",
     "dependencies": {
         "device": "*",
