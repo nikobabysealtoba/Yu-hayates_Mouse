@@ -21,8 +21,8 @@ enum Position {
     Y = 1
 }
 function isPositionInHitbox(x: number, y: number): string {
-    x -= mouseHitbox[0]
-    y -= mouseHitbox[1]
+    x -= mouseHitbox[0] - CameraProperty.X
+    y -= mouseHitbox[1] - CameraProperty.Y
     for (let hitbox of hitboxes) {
         let rect = hitbox.rect;
         if (x >= rect[0] && y >= rect[1] && x <= rect[2] && y <= rect[3]) {
@@ -43,10 +43,10 @@ namespace Mouse {
     //% block="Get $Pos of mouse"
     export function GetPositionOfMouse(Pos: Position) {
         if (Pos == 0) {
-            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX, sensibilityX), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0]
+            X = Math.map(Math.map(controller.acceleration(ControllerDimension.X), -1023, 1023, 0 - sensibilityX, sensibilityX), -1023, 1023, 0, scene.screenWidth()) - mouseHitbox[0] - CameraProperty.X
             return X
         } else {
-            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibilityY, sensibilityY), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1]
+            Y = Math.map(Math.map(controller.acceleration(ControllerDimension.Y), -1023, 1023, 0 - sensibilityY, sensibilityY), -1023, 1023, 0, scene.screenHeight()) - mouseHitbox[1] - CameraProperty.Y
             return Y
         }
     }
