@@ -62,14 +62,6 @@ namespace Mouse {
         sensibilityY01 = Math.map(sensibilityNum / 1.33, 0, 1, 500, 1023)
         sensibilityX00 = Math.map(sensibilityNum * 1.33, 0, 1, 500, 1023)
     }
-    //% group="Mouse"
-    export function x() {
-        return GetPositionOfMouse(0)
-    }
-    //% group="Mouse"
-    export function y() {
-        return GetPositionOfMouse(1)
-    }
     //% block="create hitbox with name $name at x$x1 y$y1 to x$x2 y$y2"
     //% name.shadow="HitboxNameList"
     //% group="Hitboxes"
@@ -111,7 +103,7 @@ namespace Mouse {
     //% blockHidden=true shim=TD_ID
     //% name.fieldEditor="autocomplete" name.fieldOptions.decompileLiterals=true
     //% name.fieldOptions.key="HitboxNameList"
-    export function TurtleNameShadow(name: string) {
+    export function HitBoxNameShadow(name: string) {
         return name
     }
 }
